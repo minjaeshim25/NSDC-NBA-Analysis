@@ -1,0 +1,32 @@
+# Q1: Do matchup edges hold across eras?
+
+**Question:** Do some teams consistently do better against specific opponents
+than expected, and does that hold in every era, or does it depend on the players?
+
+**Source:** FiveThirtyEight NBA Elo dataset (nbaallelo.csv)
+https://github.com/fivethirtyeight/data/tree/master/nba-elo
+
+**Files**
+- q1_games_clean.csv: cleaned data, one row per game
+- q1_matchup_cleaning.ipynb: cleaning through Google Colab
+
+## Cleaning steps
+- Kept NBA games only (dropped the ABA, a separate league, before it merged with NBA)
+- Kept regular season only (playoff series repeat the same matchup up to 7 times)
+- Kept 1979-80 season onward (3-point line added; start of the modern NBA)
+- Dropped 19 neutral-site games (no home team)
+- Removed duplicate rows (each game was listed twice, once from each team's side)
+- Final result: 39,620 games
+
+## Columns
+game_id: unique ID for each game
+year_id: season, labeled by the year it ended (2015 = 2014-15)
+fran_id: team A's franchise ID
+opp_fran: team B's franchise ID
+game_location: H = home team, A = away team
+pts: points scored by team A
+opp_pts: points scored by team B
+forecast: pre-game chance team A wins, based on Elo ratings (already relative to the league each season)
+win: 1 if team A won, 0 if they lost
+edge: win - forecast; positive = team A did better than expected
+era: 1980-1994, 1995-2004, or 2005-2015
